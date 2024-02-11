@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { container } from '../adapters/container';
 import { hashSlice } from './hash';
+import { cryptoSlice } from './crypto';
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => {
@@ -10,5 +11,6 @@ export const store = configureStore({
   },
   reducer: {
     hash: hashSlice.reducer,
+    crypto: cryptoSlice.reducer,
   },
 });

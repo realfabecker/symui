@@ -1,10 +1,12 @@
 import { ActionStatus } from '../../core/entities/entities';
 
 export const initialState = {
-  md5: {
+  aes: {
     status: ActionStatus.IDLE,
     error: '',
-    hashed: '',
+    key: '1234567890921456',
+    cipherText: '',
+    plainText: '',
   },
 };
-export type HashState = typeof initialState;
+export type CryptoState = typeof initialState;

@@ -12,7 +12,7 @@ wails dev
 
 ## Screenshot
 
-<img src="./docs/images/dashboard.png" alt="dashboard" style="border: 2px solid  gray; border-radius:15px" width="800" height="600">
+<img src="./docs/images/dashboard.png" alt="dashboard" style="border: 2px solid  gray; border-radius:15px">
 
 ## Change log
 

@@ -31,31 +31,27 @@ export default function MD5() {
         </Box>
         <Stack spacing={4}>
           <FormControl>
-            <FormLabel sx={{ fontWeight: 600 }}>Entrada</FormLabel>
+            <FormLabel sx={{ fontWeight: 600 }}>Input</FormLabel>
             <Textarea
               size="sm"
               minRows={4}
               sx={{ mt: 1.5 }}
-              placeholder={'Forneça o valor a ser aplicado o Hash'}
               value={plainText}
               onChange={(e) => setPlainText(e.target.value)}
             />
           </FormControl>
           <Divider />
-
-          {store.status === ActionStatus.REJECTED && (
-            <p>Erro inesperado ao realizar o HASH</p>
-          )}
-
           <FormControl>
-            <FormLabel sx={{ fontWeight: 600 }}>Resultado</FormLabel>
+            <FormLabel sx={{ fontWeight: 600 }}>Output</FormLabel>
             <Textarea
               size="sm"
               minRows={4}
-              sx={{ mt: 1.5 }}
+              sx={{
+                mt: 1.5,
+                color: store.error ? 'danger.500' : 'common.black',
+              }}
               readOnly
-              disabled
-              value={store.hashed}
+              value={store.error || store.hashed}
             />
           </FormControl>
         </Stack>

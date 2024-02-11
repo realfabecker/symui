@@ -1,3 +1,4 @@
 export const Types = {
-  IMd5Hasher: Symbol.for('IMd5Hasher'),
+  IMd5Provider: Symbol.for('IMd5Hasher'),
+  IAesProvider: Symbol.for('IAesProvider'),
 };

@@ -1,3 +1,3 @@
 export * from './Header';
-export * from './Navigation';
+export * from './SideNav';
 export * from './Layout';
