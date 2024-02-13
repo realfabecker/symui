@@ -50,3 +50,36 @@ export namespace hash {
 
 }
 
+export namespace jwt {
+	
+	export class JwtDecodedResult {
+	    decoded?: string;
+	    error?: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new JwtDecodedResult(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.decoded = source["decoded"];
+	        this.error = source["error"];
+	    }
+	}
+	export class JwtEncodedResult {
+	    encoded?: string;
+	    error?: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new JwtEncodedResult(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.encoded = source["encoded"];
+	        this.error = source["error"];
+	    }
+	}
+
+}
+

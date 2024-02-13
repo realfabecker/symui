@@ -3,6 +3,7 @@ package main
 import (
 	"changeme/backend/crypto"
 	"changeme/backend/hash"
+	"changeme/backend/jwt"
 	"context"
 	"github.com/labstack/gommon/log"
 )
@@ -53,4 +54,22 @@ func (a *App) AesDecrypt(key string, message string) crypto.CryptoDecryptResult 
 		return crypto.CryptoDecryptResult{Error: err.Error()}
 	}
 	return crypto.CryptoDecryptResult{PlainText: h}
+}
+
+func (a *App) JwtEncode(key string, message string) jwt.JwtEncodedResult {
+	h, err := jwt.Encode(message, key)
+	if err != nil {
+		log.Error(err)
+		return jwt.JwtEncodedResult{Error: err.Error()}
+	}
+	return jwt.JwtEncodedResult{Encoded: h}
+}
+
+func (a *App) JwtDecode(message string) jwt.JwtDecodedResult {
+	h, err := jwt.Decode(message)
+	if err != nil {
+		log.Error(err)
+		return jwt.JwtDecodedResult{Error: err.Error()}
+	}
+	return jwt.JwtDecodedResult{Decoded: h}
 }

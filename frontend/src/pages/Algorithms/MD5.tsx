@@ -13,13 +13,12 @@ import {
   Button,
 } from '@mui/joy';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { getActionMd5Hash } from '../../store/hash/creators';
+import { getActionMd5Hash } from '../../store/md5/creators';
 import { useState } from 'react';
-import { ActionStatus } from '../../core/entities/entities';
 
 export default function MD5() {
   const dispatch = useAppDispatch();
-  const store = useAppSelector((state) => state.hash.md5);
+  const store = useAppSelector((state) => state.md5.md5);
   const [plainText, setPlainText] = useState('');
   return (
     <Card>

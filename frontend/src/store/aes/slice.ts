@@ -3,7 +3,7 @@ import { getActionAesDecrypt, getActionAesEncrypt } from './creators';
 import { initialState } from './state';
 import { ActionStatus } from '../../core/entities/entities';
 
-export const cryptoSlice = createSlice({
+export const aesSlice = createSlice({
   name: 'crypto',
   initialState,
   reducers: (create) => ({

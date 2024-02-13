@@ -13,3 +13,11 @@ export function AesEncrypt(arg1, arg2) {
 export function CreateMd5Hash(arg1) {
   return window['go']['main']['App']['CreateMd5Hash'](arg1);
 }
+
+export function JwtDecode(arg1) {
+  return window['go']['main']['App']['JwtDecode'](arg1);
+}
+
+export function JwtEncode(arg1, arg2) {
+  return window['go']['main']['App']['JwtEncode'](arg1, arg2);
+}

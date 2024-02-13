@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { container } from '../adapters/container';
-import { hashSlice } from './hash';
-import { cryptoSlice } from './crypto';
+import { md5Slice } from './md5';
+import { aesSlice } from './aes';
+import { jwtSlice } from './jwt';
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => {
@@ -10,7 +11,8 @@ export const store = configureStore({
     });
   },
   reducer: {
-    hash: hashSlice.reducer,
-    crypto: cryptoSlice.reducer,
+    md5: md5Slice.reducer,
+    aes: aesSlice.reducer,
+    jwt: jwtSlice.reducer,
   },
 });

@@ -18,28 +18,32 @@ import {
   getActionAesDecrypt,
   getActionAesEncrypt,
 } from '../../store/aes/creators';
-import { aesSlice } from '../../store/aes';
+import { jwtSlice } from '../../store/jwt';
+import {
+  getActionJwtDecode,
+  getActionJwtEncode,
+} from '../../store/jwt/creators';
 
-export default function AES() {
+export default function JWT() {
   const dispatch = useAppDispatch();
-  const store = useAppSelector((state) => state.aes.aes);
+  const store = useAppSelector((state) => state.jwt.jwt);
 
   return (
     <Card>
       <CardContent>
         <Box sx={{ mb: 1, display: 'flex' }}>
           <Typography level="h1" sx={{ fontWeight: 800 }}>
-            AES
+            JWT
           </Typography>
         </Box>
         <Stack spacing={4}>
           <FormControl>
-            <FormLabel sx={{ fontWeight: 600 }}>AES Key</FormLabel>
+            <FormLabel sx={{ fontWeight: 600 }}>JWT Key</FormLabel>
             <Input
-              placeholder="AES key"
+              placeholder="JWT key"
               value={store.key}
               onChange={(e) =>
-                dispatch(aesSlice.actions.aes_set_key(e.target.value))
+                dispatch(jwtSlice.actions.jwt_set_key(e.target.value))
               }
             />
           </FormControl>
@@ -52,20 +56,20 @@ export default function AES() {
               sx={{ mt: 1.5 }}
               value={store.plainText}
               onChange={(e) =>
-                dispatch(aesSlice.actions.aes_set_plain(e.target.value))
+                dispatch(jwtSlice.actions.jwt_set_plain(e.target.value))
               }
             />
           </FormControl>
           <Divider />
           <FormControl>
-            <FormLabel sx={{ fontWeight: 600 }}>Cipher Text</FormLabel>
+            <FormLabel sx={{ fontWeight: 600 }}>Encoded Text</FormLabel>
             <Textarea
               size="sm"
               minRows={4}
               sx={{ mt: 1.5 }}
-              value={store.cipherText}
+              value={store.encoded}
               onChange={(e) =>
-                dispatch(aesSlice.actions.aes_set_cipher(e.target.value))
+                dispatch(jwtSlice.actions.jwt_set_encoded(e.target.value))
               }
             />
           </FormControl>
@@ -77,28 +81,28 @@ export default function AES() {
           color="neutral"
           onClick={() => {
             dispatch(
-              getActionAesEncrypt({
+              getActionJwtEncode({
                 plainText: store.plainText,
                 key: store.key,
               }),
             );
           }}
         >
-          Encrypt
+          Encode
         </Button>
         <Button
           variant="outlined"
           color="neutral"
           onClick={() => {
             dispatch(
-              getActionAesDecrypt({
-                cipherText: store.cipherText,
+              getActionJwtDecode({
+                encoded: store.encoded,
                 key: store.key,
               }),
             );
           }}
         >
-          Decrypt
+          Decode
         </Button>
       </CardActions>
     </Card>

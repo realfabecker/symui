@@ -3,8 +3,8 @@ import { getActionMd5Hash } from './creators';
 import { initialState } from './state';
 import { ActionStatus } from '../../core/entities/entities';
 
-export const hashSlice = createSlice({
-  name: 'hash',
+export const md5Slice = createSlice({
+  name: 'md5Slice',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
