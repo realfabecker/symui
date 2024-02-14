@@ -1,10 +1,10 @@
-module changeme
+module github.com/realfabecker/symui
 
-go 1.18
+go 1.19
 
 require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible
-	github.com/labstack/gommon v0.4.0
+	github.com/labstack/gommon v0.4.2
 	github.com/wailsapp/wails/v2 v2.8.0
 )
 
@@ -20,7 +20,7 @@ require (
 	github.com/leaanthony/slicer v1.6.0 // indirect
 	github.com/leaanthony/u v1.1.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.19 // indirect
+	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/pkg/browser v0.0.0-20210911075715-681adbf594b8 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
@@ -36,5 +36,3 @@ require (
 	golang.org/x/sys v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 )
-
-// replace github.com/wailsapp/wails/v2 v2.8.0 => /home/nuvem/go/pkg/mod

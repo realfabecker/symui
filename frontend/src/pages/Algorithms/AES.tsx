@@ -12,7 +12,9 @@ import {
   CardActions,
   Button,
   Input,
+  FormHelperText,
 } from '@mui/joy';
+import InfoOutlined from '@mui/icons-material/InfoOutlined';
 import { useAppDispatch, useAppSelector } from '../../store';
 import {
   getActionAesDecrypt,
@@ -29,11 +31,13 @@ export default function AES() {
       <CardContent>
         <Box sx={{ mb: 1, display: 'flex' }}>
           <Typography level="h1" sx={{ fontWeight: 800 }}>
-            AES
+            AES 128 CTR
           </Typography>
         </Box>
         <Stack spacing={4}>
-          <FormControl>
+          <FormControl
+            error={!!(store?.key?.length && store.key.length !== 16)}
+          >
             <FormLabel sx={{ fontWeight: 600 }}>AES Key</FormLabel>
             <Input
               placeholder="AES key"
@@ -42,9 +46,15 @@ export default function AES() {
                 dispatch(aesSlice.actions.aes_set_key(e.target.value))
               }
             />
+            {!!(store?.key?.length && store.key.length !== 16) && (
+              <FormHelperText>
+                <InfoOutlined />
+                The AES key argument should have 16 bytes for AES-128.
+              </FormHelperText>
+            )}
           </FormControl>
           <Divider />
-          <FormControl>
+          <FormControl error={store.errorType === 'decrypt'}>
             <FormLabel sx={{ fontWeight: 600 }}>Plain Text</FormLabel>
             <Textarea
               size="sm"
@@ -55,9 +65,15 @@ export default function AES() {
                 dispatch(aesSlice.actions.aes_set_plain(e.target.value))
               }
             />
+            {store.errorType === 'decrypt' && (
+              <FormHelperText>
+                <InfoOutlined />
+                {store.error}
+              </FormHelperText>
+            )}
           </FormControl>
           <Divider />
-          <FormControl>
+          <FormControl error={store.errorType === 'encrypt'}>
             <FormLabel sx={{ fontWeight: 600 }}>Cipher Text</FormLabel>
             <Textarea
               size="sm"
@@ -68,6 +84,12 @@ export default function AES() {
                 dispatch(aesSlice.actions.aes_set_cipher(e.target.value))
               }
             />
+            {store.errorType === 'encrypt' && (
+              <FormHelperText>
+                <InfoOutlined />
+                {store.error}
+              </FormHelperText>
+            )}
           </FormControl>
         </Stack>
       </CardContent>

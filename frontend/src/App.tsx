@@ -18,7 +18,7 @@ function App() {
             <Route path="aes" element={<AES />} />
             <Route path="jwt" element={<JWT />} />
           </Route>
-          <Route path="*" element={<Navigate to="md5" />}></Route>
+          <Route path="*" element={<Navigate to="jwt" />}></Route>
         </Routes>
       </BrowserRouter>
     </CssVarsProvider>

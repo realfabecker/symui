@@ -1,4 +1,4 @@
-export namespace crypto {
+export namespace domain {
 	
 	export class CryptoDecryptResult {
 	    plainText: string;
@@ -28,11 +28,6 @@ export namespace crypto {
 	        this.error = source["error"];
 	    }
 	}
-
-}
-
-export namespace hash {
-	
 	export class HashResult {
 	    hashed?: string;
 	    error?: string;
@@ -47,11 +42,6 @@ export namespace hash {
 	        this.error = source["error"];
 	    }
 	}
-
-}
-
-export namespace jwt {
-	
 	export class JwtDecodedResult {
 	    decoded?: string;
 	    error?: string;

@@ -30,6 +30,7 @@ export const jwtSlice = createSlice({
     builder.addCase(getActionJwtEncode.rejected, (state, action) => {
       state.jwt.status = ActionStatus.REJECTED;
       state.jwt.error = action?.error?.message || 'unexpected jwt result';
+      state.jwt.encoded = state.jwt.error;
     });
     builder.addCase(getActionJwtDecode.pending, (state) => {
       state.jwt.status = ActionStatus.PENDING;
@@ -42,6 +43,7 @@ export const jwtSlice = createSlice({
     builder.addCase(getActionJwtDecode.rejected, (state, action) => {
       state.jwt.status = ActionStatus.REJECTED;
       state.jwt.error = action?.error?.message || 'unexpected decode result';
+      state.jwt.plainText = state.jwt.error;
     });
   },
 });

@@ -1,4 +1,4 @@
-package crypto
+package aes
 
 import (
 	"crypto/aes"
@@ -21,7 +21,7 @@ func AesEncrypt(key []byte, message string) (string, error) {
 		return "", fmt.Errorf("unable to read iv from io: %w", err)
 	}
 
-	stream := cipher.NewCFBEncrypter(block, iv)
+	stream := cipher.NewCTR(block, iv)
 	stream.XORKeyStream(cipherText[aes.BlockSize:], []byte(message))
 	return base64.StdEncoding.EncodeToString(cipherText), nil
 }
@@ -40,7 +40,7 @@ func AesDecrypt(key []byte, message string) (string, error) {
 	iv := cipherText[:aes.BlockSize]
 	cipherText = cipherText[aes.BlockSize:]
 
-	stream := cipher.NewCFBDecrypter(block, iv)
+	stream := cipher.NewCTR(block, iv)
 	stream.XORKeyStream(cipherText, cipherText)
 	return string(cipherText), nil
 }

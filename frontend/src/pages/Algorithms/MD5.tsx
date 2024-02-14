@@ -11,10 +11,12 @@ import {
   CardContent,
   CardActions,
   Button,
+  FormHelperText,
 } from '@mui/joy';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { getActionMd5Hash } from '../../store/md5/creators';
 import { useState } from 'react';
+import InfoOutlined from '@mui/icons-material/InfoOutlined';
 
 export default function MD5() {
   const dispatch = useAppDispatch();
@@ -40,7 +42,7 @@ export default function MD5() {
             />
           </FormControl>
           <Divider />
-          <FormControl>
+          <FormControl error={!!store.error}>
             <FormLabel sx={{ fontWeight: 600 }}>Output</FormLabel>
             <Textarea
               size="sm"
@@ -50,8 +52,14 @@ export default function MD5() {
                 color: store.error ? 'danger.500' : 'common.black',
               }}
               readOnly
-              value={store.error || store.hashed}
+              value={store.hashed}
             />
+            {!!store.error && (
+              <FormHelperText>
+                <InfoOutlined />
+                {store.error}
+              </FormHelperText>
+            )}
           </FormControl>
         </Stack>
       </CardContent>

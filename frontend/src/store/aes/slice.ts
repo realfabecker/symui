@@ -22,6 +22,7 @@ export const aesSlice = createSlice({
     builder.addCase(getActionAesEncrypt.pending, (state) => {
       state.aes.status = ActionStatus.PENDING;
       state.aes.error = '';
+      state.aes.errorType = '';
     });
     builder.addCase(getActionAesEncrypt.fulfilled, (state, action) => {
       state.aes.cipherText = action.payload;
@@ -30,10 +31,12 @@ export const aesSlice = createSlice({
     builder.addCase(getActionAesEncrypt.rejected, (state, action) => {
       state.aes.status = ActionStatus.REJECTED;
       state.aes.error = action?.error?.message || 'unexpected hash result';
+      state.aes.errorType = 'encrypt';
     });
     builder.addCase(getActionAesDecrypt.pending, (state) => {
       state.aes.status = ActionStatus.PENDING;
       state.aes.error = '';
+      state.aes.errorType = '';
     });
     builder.addCase(getActionAesDecrypt.fulfilled, (state, action) => {
       state.aes.plainText = action.payload;
@@ -42,6 +45,7 @@ export const aesSlice = createSlice({
     builder.addCase(getActionAesDecrypt.rejected, (state, action) => {
       state.aes.status = ActionStatus.REJECTED;
       state.aes.error = action?.error?.message || 'unexpected hash result';
+      state.aes.errorType = 'decrypt';
     });
   },
 });

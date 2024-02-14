@@ -31,8 +31,8 @@ export default function SideNav() {
                     }}
                   />
                 </ListItemDecorator>
-                <ListItemContent onClick={() => navigate('/md5')}>
-                  MD5
+                <ListItemContent onClick={() => navigate('/jwt')}>
+                  JWT
                 </ListItemContent>
               </ListItemButton>
             </ListItem>
@@ -65,8 +65,8 @@ export default function SideNav() {
                     }}
                   />
                 </ListItemDecorator>
-                <ListItemContent onClick={() => navigate('/jwt')}>
-                  JWT
+                <ListItemContent onClick={() => navigate('/md5')}>
+                  MD5
                 </ListItemContent>
               </ListItemButton>
             </ListItem>
