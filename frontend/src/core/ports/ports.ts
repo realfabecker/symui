@@ -11,3 +11,8 @@ export interface IJWTProvider {
   sign(key: string, content: string): Promise<string>;
   decode(encoded: string): Promise<string>;
 }
+
+export interface IBase64Provider {
+  encode(content: string): Promise<string>;
+  decode(encoded: string): Promise<string>;
+}

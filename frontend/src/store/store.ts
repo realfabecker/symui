@@ -3,6 +3,7 @@ import { container } from '../adapters/container';
 import { md5Slice } from './md5';
 import { aesSlice } from './aes';
 import { jwtSlice } from './jwt';
+import { base64Slice } from './base64';
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => {
@@ -14,5 +15,6 @@ export const store = configureStore({
     md5: md5Slice.reducer,
     aes: aesSlice.reducer,
     jwt: jwtSlice.reducer,
+    base64: base64Slice.reducer,
   },
 });

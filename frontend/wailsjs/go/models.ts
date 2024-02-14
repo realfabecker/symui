@@ -28,6 +28,34 @@ export namespace domain {
 	        this.error = source["error"];
 	    }
 	}
+	export class DecodedResult {
+	    decoded?: string;
+	    error?: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new DecodedResult(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.decoded = source["decoded"];
+	        this.error = source["error"];
+	    }
+	}
+	export class EncodedResult {
+	    encoded?: string;
+	    error?: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new EncodedResult(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.encoded = source["encoded"];
+	        this.error = source["error"];
+	    }
+	}
 	export class HashResult {
 	    hashed?: string;
 	    error?: string;

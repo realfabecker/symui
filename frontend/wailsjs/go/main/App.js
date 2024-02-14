@@ -10,6 +10,14 @@ export function AesEncrypt(arg1, arg2) {
   return window['go']['main']['App']['AesEncrypt'](arg1, arg2);
 }
 
+export function Base64Decode(arg1) {
+  return window['go']['main']['App']['Base64Decode'](arg1);
+}
+
+export function Base64Encode(arg1) {
+  return window['go']['main']['App']['Base64Encode'](arg1);
+}
+
 export function CreateMd5Hash(arg1) {
   return window['go']['main']['App']['CreateMd5Hash'](arg1);
 }

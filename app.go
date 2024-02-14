@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/labstack/gommon/log"
 	"github.com/realfabecker/symui/backend/adapters/aes"
+	"github.com/realfabecker/symui/backend/adapters/base64"
 	"github.com/realfabecker/symui/backend/adapters/jwt"
 	"github.com/realfabecker/symui/backend/adapters/md5"
 	"github.com/realfabecker/symui/backend/core/domain"
@@ -73,4 +74,22 @@ func (a *App) JwtDecode(message string) domain.JwtDecodedResult {
 		return domain.JwtDecodedResult{Error: err.Error()}
 	}
 	return domain.JwtDecodedResult{Decoded: h}
+}
+
+func (a *App) Base64Encode(message string) domain.EncodedResult {
+	h, err := base64.Encode([]byte(message))
+	if err != nil {
+		log.Error(err)
+		return domain.EncodedResult{Error: err.Error()}
+	}
+	return domain.EncodedResult{Encoded: h}
+}
+
+func (a *App) Base64Decode(message string) domain.DecodedResult {
+	h, err := base64.Decode(message)
+	if err != nil {
+		log.Error(err)
+		return domain.DecodedResult{Error: err.Error()}
+	}
+	return domain.DecodedResult{Decoded: string(h)}
 }

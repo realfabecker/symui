@@ -6,6 +6,10 @@ export function AesDecrypt(arg1:string,arg2:string):Promise<domain.CryptoDecrypt
 
 export function AesEncrypt(arg1:string,arg2:string):Promise<domain.CryptoEncryptResult>;
 
+export function Base64Decode(arg1:string):Promise<domain.DecodedResult>;
+
+export function Base64Encode(arg1:string):Promise<domain.EncodedResult>;
+
 export function CreateMd5Hash(arg1:string):Promise<domain.HashResult>;
 
 export function JwtDecode(arg1:string):Promise<domain.JwtDecodedResult>;

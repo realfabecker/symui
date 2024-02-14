@@ -70,6 +70,23 @@ export default function SideNav() {
                 </ListItemContent>
               </ListItemButton>
             </ListItem>
+            <ListItem>
+              <ListItemButton>
+                <ListItemDecorator>
+                  <Box
+                    sx={{
+                      width: '10px',
+                      height: '10px',
+                      borderRadius: '99px',
+                      bgcolor: 'primary.500',
+                    }}
+                  />
+                </ListItemDecorator>
+                <ListItemContent onClick={() => navigate('/base64')}>
+                  Base64
+                </ListItemContent>
+              </ListItemButton>
+            </ListItem>
           </List>
         </ListItem>
       </List>

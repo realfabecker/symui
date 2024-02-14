@@ -6,6 +6,7 @@ import MD5 from './pages/Algorithms/MD5';
 import AES from './pages/Algorithms/AES';
 import Layout from './pages/Layout/Layout';
 import JWT from './pages/Algorithms/JWT';
+import Base64 from './pages/Algorithms/Base64';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="md5" element={<MD5 />} />
             <Route path="aes" element={<AES />} />
             <Route path="jwt" element={<JWT />} />
+            <Route path="base64" element={<Base64 />} />
           </Route>
           <Route path="*" element={<Navigate to="jwt" />}></Route>
         </Routes>

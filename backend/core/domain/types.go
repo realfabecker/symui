@@ -1,5 +1,15 @@
 package domain
 
+type EncodedResult struct {
+	Encoded string `json:"encoded,omitempty"`
+	Error   string `json:"error,omitempty"`
+}
+
+type DecodedResult struct {
+	Decoded string `json:"decoded,omitempty"`
+	Error   string `json:"error,omitempty"`
+}
+
 type JwtEncodedResult struct {
 	Encoded string `json:"encoded,omitempty"`
 	Error   string `json:"error,omitempty"`
