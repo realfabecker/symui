@@ -22,6 +22,10 @@ export function CreateMd5Hash(arg1) {
   return window['go']['main']['App']['CreateMd5Hash'](arg1);
 }
 
+export function GpgListKeys() {
+  return window['go']['main']['App']['GpgListKeys']();
+}
+
 export function JwtDecode(arg1) {
   return window['go']['main']['App']['JwtDecode'](arg1);
 }

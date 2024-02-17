@@ -7,4 +7,3 @@ export const initialState = {
     hashed: '',
   },
 };
-export type HashState = typeof initialState;

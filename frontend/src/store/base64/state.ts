@@ -8,4 +8,3 @@ export const initialState = {
     plainText: '',
   },
 };
-export type Base64State = typeof initialState;

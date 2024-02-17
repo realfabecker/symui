@@ -7,6 +7,7 @@ import AES from './pages/Algorithms/AES';
 import Layout from './pages/Layout/Layout';
 import JWT from './pages/Algorithms/JWT';
 import Base64 from './pages/Algorithms/Base64';
+import GPG from './pages/Algorithms/GPG';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="aes" element={<AES />} />
             <Route path="jwt" element={<JWT />} />
             <Route path="base64" element={<Base64 />} />
+            <Route path="gpg" element={<GPG />} />
           </Route>
           <Route path="*" element={<Navigate to="jwt" />}></Route>
         </Routes>

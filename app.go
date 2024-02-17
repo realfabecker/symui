@@ -5,6 +5,7 @@ import (
 	"github.com/labstack/gommon/log"
 	"github.com/realfabecker/symui/backend/adapters/aes"
 	"github.com/realfabecker/symui/backend/adapters/base64"
+	"github.com/realfabecker/symui/backend/adapters/gpg"
 	"github.com/realfabecker/symui/backend/adapters/jwt"
 	"github.com/realfabecker/symui/backend/adapters/md5"
 	"github.com/realfabecker/symui/backend/core/domain"
@@ -92,4 +93,13 @@ func (a *App) Base64Decode(message string) domain.DecodedResult {
 		return domain.DecodedResult{Error: err.Error()}
 	}
 	return domain.DecodedResult{Decoded: string(h)}
+}
+
+func (a *App) GpgListKeys() domain.GpgListKeysResult {
+	l, err := gpg.ListKeys()
+	if err != nil {
+		log.Error(err)
+		return domain.GpgListKeysResult{Error: err.Error()}
+	}
+	return domain.GpgListKeysResult{Data: l}
 }

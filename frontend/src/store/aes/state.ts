@@ -10,4 +10,3 @@ export const initialState = {
     plainText: '',
   },
 };
-export type CryptoState = typeof initialState;

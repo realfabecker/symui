@@ -56,6 +56,106 @@ export namespace domain {
 	        this.error = source["error"];
 	    }
 	}
+	export class GpgKeyPub {
+	    type: string;
+	    length: number;
+	    algo: number;
+	    keyid: string;
+	    date: number;
+	    expires: number;
+	
+	    static createFrom(source: any = {}) {
+	        return new GpgKeyPub(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.type = source["type"];
+	        this.length = source["length"];
+	        this.algo = source["algo"];
+	        this.keyid = source["keyid"];
+	        this.date = source["date"];
+	        this.expires = source["expires"];
+	    }
+	}
+	export class GpgKeyUid {
+	    uid: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new GpgKeyUid(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.uid = source["uid"];
+	    }
+	}
+	export class GpgKey {
+	    uid: GpgKeyUid;
+	    pub: GpgKeyPub;
+	
+	    static createFrom(source: any = {}) {
+	        return new GpgKey(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.uid = this.convertValues(source["uid"], GpgKeyUid);
+	        this.pub = this.convertValues(source["pub"], GpgKeyPub);
+	    }
+	
+		convertValues(a: any, classs: any, asMap: boolean = false): any {
+		    if (!a) {
+		        return a;
+		    }
+		    if (a.slice) {
+		        return (a as any[]).map(elem => this.convertValues(elem, classs));
+		    } else if ("object" === typeof a) {
+		        if (asMap) {
+		            for (const key of Object.keys(a)) {
+		                a[key] = new classs(a[key]);
+		            }
+		            return a;
+		        }
+		        return new classs(a);
+		    }
+		    return a;
+		}
+	}
+	
+	
+	export class GpgListKeysResult {
+	    data: GpgKey[];
+	    error: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new GpgListKeysResult(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.data = this.convertValues(source["data"], GpgKey);
+	        this.error = source["error"];
+	    }
+	
+		convertValues(a: any, classs: any, asMap: boolean = false): any {
+		    if (!a) {
+		        return a;
+		    }
+		    if (a.slice) {
+		        return (a as any[]).map(elem => this.convertValues(elem, classs));
+		    } else if ("object" === typeof a) {
+		        if (asMap) {
+		            for (const key of Object.keys(a)) {
+		                a[key] = new classs(a[key]);
+		            }
+		            return a;
+		        }
+		        return new classs(a);
+		    }
+		    return a;
+		}
+	}
 	export class HashResult {
 	    hashed?: string;
 	    error?: string;
