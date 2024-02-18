@@ -132,3 +132,13 @@ Expire-Date: %s
 	}
 	return nil
 }
+
+func DeleteSecretKeys(email string) error {
+	cmd := exec.Command("gpg", "--delete-secret-keys", email)
+	return cmd.Run()
+}
+
+func DeletePublicKeys(email string) error {
+	cmd := exec.Command("gpg", "--delete-keys", email)
+	return cmd.Run()
+}

@@ -111,3 +111,15 @@ func (a *App) GpgAddKey(email string, weeks int8) domain.EmptyResult {
 	}
 	return domain.EmptyResult{}
 }
+
+func (a *App) GpgDeleteKey(email string) domain.EmptyResult {
+	if err := gpg.DeleteSecretKeys(email); err != nil {
+		log.Error(err)
+		return domain.EmptyResult{Error: err.Error()}
+	}
+	if err := gpg.DeletePublicKeys(email); err != nil {
+		log.Error(err)
+		return domain.EmptyResult{Error: err.Error()}
+	}
+	return domain.EmptyResult{}
+}

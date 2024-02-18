@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import {
   Card,
   Box,
@@ -16,15 +17,16 @@ import {
   Input,
   Select,
   Option,
+  ChipDelete,
 } from '@mui/joy';
+import { DeleteForever } from '@mui/icons-material';
+import { Add } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { useEffect, useState } from 'react';
 import {
   getActionGpgAddKey,
   getActionGpgListKeys,
 } from '../../store/gpg/creators';
-import { Add } from '@mui/icons-material';
-import { ActionStatus } from '../../core/entities/entities';
+import { ActionStatus, GpgKey } from '../../core/entities/entities';
 
 const GpgAddKey = (opts: { open: boolean; onClose: () => void }) => {
   const dispatch = useAppDispatch();
@@ -40,7 +42,6 @@ const GpgAddKey = (opts: { open: boolean; onClose: () => void }) => {
             const json = Object.fromEntries(
               (new FormData(e.currentTarget) as any).entries(),
             );
-
             dispatch(
               getActionGpgAddKey({
                 email: json.email,
@@ -75,9 +76,51 @@ const GpgAddKey = (opts: { open: boolean; onClose: () => void }) => {
   );
 };
 
-const GpgListKeys = () => {
-  const store = useAppSelector((state) => state.gpg.gpg);
+const GpgListItem = ({ item }: { item: GpgKey }) => {
   const isExpired = (time: number) => Date.now() > time * 1000;
+  return (
+    <Card variant="outlined" key={item.pub.keyid}>
+      <CardContent>
+        <Stack spacing={2}>
+          <Typography level="title-sm" id="card-description">
+            {item.uid.uid}
+          </Typography>
+          <Stack direction="row" spacing={2}>
+            <Chip
+              variant="outlined"
+              color={isExpired(item.pub.expires) ? 'danger' : 'primary'}
+              size="sm"
+              sx={{ pointerEvents: 'none', padding: '0.25rem' }}
+            >
+              {isExpired(item.pub.expires) ? 'Expired ' : 'Expires '}
+              {new Date(item.pub.expires * 1000).toISOString().slice(0, 10)}
+            </Chip>
+            <Chip
+              variant={'outlined'}
+              color={'danger'}
+              endDecorator={
+                <ChipDelete color={'danger'} variant={'plain'}>
+                  <DeleteForever />
+                </ChipDelete>
+              }
+            >
+              Delete
+            </Chip>
+          </Stack>
+        </Stack>
+      </CardContent>
+    </Card>
+  );
+};
+
+const GpgListKeys = () => {
+  const dispatch = useAppDispatch();
+  const store = useAppSelector((state) => state.gpg.gpg);
+
+  useEffect(() => {
+    dispatch(getActionGpgListKeys({}));
+  }, []);
+
   return (
     <Box
       sx={{
@@ -88,24 +131,7 @@ const GpgListKeys = () => {
       }}
     >
       {(store?.keys || []).map((key) => (
-        <Card variant="outlined" key={key.pub.keyid}>
-          <CardContent>
-            <Stack spacing={2}>
-              <Typography level="title-sm" id="card-description">
-                {key.uid.uid}
-              </Typography>
-              <Chip
-                variant="outlined"
-                color={isExpired(key.pub.expires) ? 'danger' : 'primary'}
-                size="sm"
-                sx={{ pointerEvents: 'none', padding: '0.25rem' }}
-              >
-                {isExpired(key.pub.expires) ? 'Expirado ' : 'Expira '}
-                em {new Date(key.pub.expires * 1000).toISOString().slice(0, 10)}
-              </Chip>
-            </Stack>
-          </CardContent>
-        </Card>
+        <GpgListItem key={key.pub.keyid} item={key} />
       ))}
     </Box>
   );
@@ -114,10 +140,6 @@ const GpgListKeys = () => {
 export default function GPG() {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    dispatch(getActionGpgListKeys({}));
-  }, []);
 
   return (
     <Stack direction={'column'} spacing={2}>

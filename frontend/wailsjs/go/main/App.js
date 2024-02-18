@@ -26,6 +26,10 @@ export function GpgAddKey(arg1, arg2) {
   return window['go']['main']['App']['GpgAddKey'](arg1, arg2);
 }
 
+export function GpgDeleteKey(arg1) {
+  return window['go']['main']['App']['GpgDeleteKey'](arg1);
+}
+
 export function GpgListKeys() {
   return window['go']['main']['App']['GpgListKeys']();
 }
