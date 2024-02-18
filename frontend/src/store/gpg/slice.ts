@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initialState } from './state';
 import { ActionStatus } from '../../core/entities/entities';
-import { getActionGpgListKeys } from './creators';
+import { getActionGpgAddKey, getActionGpgListKeys } from './creators';
 
 export const gpgSlice = createSlice({
   name: 'gpgSlice',
@@ -18,6 +18,16 @@ export const gpgSlice = createSlice({
     builder.addCase(getActionGpgListKeys.rejected, (state, payload) => {
       state.gpg.status = ActionStatus.REJECTED;
       state.gpg.error = payload?.error?.message || 'unexpected gpg list error';
+    });
+    builder.addCase(getActionGpgAddKey.pending, (state) => {
+      state.gpg.status = ActionStatus.PENDING;
+    });
+    builder.addCase(getActionGpgAddKey.rejected, (state, payload) => {
+      state.gpg.status = ActionStatus.REJECTED;
+      state.gpg.error = payload?.error?.message || 'unexpected gpg gen error';
+    });
+    builder.addCase(getActionGpgAddKey.fulfilled, (state) => {
+      state.gpg.status = ActionStatus.FULFILLED;
     });
   },
 });

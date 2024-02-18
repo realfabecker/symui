@@ -3,10 +3,12 @@ package gpg
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"github.com/realfabecker/symui/backend/core/domain"
 	"os/exec"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func ListKeys() ([]domain.GpgKey, error) {
@@ -70,7 +72,7 @@ func listKeysRaw() ([][]string, error) {
 func newGpgKeyPub(pub string) (*domain.GpgKeyPub, error) {
 	lkey := strings.Split(pub, ":")
 	if len(lkey) < 6 {
-		return nil, errors.New("unable to obtain pub meta from key")
+		return nil, errors.New("newGpgKeyPub: unable to obtain pub meta from key")
 	}
 	length, err := strconv.Atoi(lkey[2])
 	if err != nil {
@@ -101,7 +103,32 @@ func newGpgKeyPub(pub string) (*domain.GpgKeyPub, error) {
 func newGpgKeyUid(uid string) (*domain.GpgKeyUid, error) {
 	lkey := strings.Split(uid, ":")
 	if len(lkey) < 9 {
-		return nil, errors.New("unable to obtain uid meta from key")
+		return nil, errors.New("newGpgKeyUid: unable to obtain uid meta from key")
 	}
 	return &domain.GpgKeyUid{Uid: lkey[9]}, nil
+}
+
+func NewGpgKey(email string, weeks int8) error {
+	cmd := exec.Command("gpg", "--batch", "--gen-key")
+	cmd.Stdin = bytes.NewBufferString(fmt.Sprintf(`
+Key-Type: 1
+Key-Length: 2048
+Subkey-Type: 1
+Subkey-Length: 2048
+Name-Real: %s
+Name-Email: %s
+Expire-Date: %s
+`, email, email, time.Now().AddDate(0, 0, 7*int(weeks)).Format("20060102T150405")))
+	var errb bytes.Buffer
+	cmd.Stderr = &errb
+	if err := cmd.Run(); err != nil {
+		return err
+	}
+	if errb.Len() == 0 {
+		return errors.New("newGpgKey: unexpected error generating key")
+	}
+	if !strings.Contains(errb.String(), "revocation certificate stored as") {
+		return fmt.Errorf("newGpgKey: %s", errb.String())
+	}
+	return nil
 }

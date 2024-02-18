@@ -21,4 +21,9 @@ export class FakeGpgProvider implements IGpgProvider {
       },
     ];
   }
+
+  async addKey(email: string, weeks: number): Promise<void> {
+    console.log({ email, weeks });
+    return;
+  }
 }

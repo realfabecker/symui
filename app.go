@@ -103,3 +103,11 @@ func (a *App) GpgListKeys() domain.GpgListKeysResult {
 	}
 	return domain.GpgListKeysResult{Data: l}
 }
+
+func (a *App) GpgAddKey(email string, weeks int8) domain.EmptyResult {
+	if err := gpg.NewGpgKey(email, weeks); err != nil {
+		log.Error(err)
+		return domain.EmptyResult{Error: err.Error()}
+	}
+	return domain.EmptyResult{}
+}

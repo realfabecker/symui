@@ -1,5 +1,9 @@
 package domain
 
+type EmptyResult struct {
+	Error string `json:"error,omitempty"`
+}
+
 type EncodedResult struct {
 	Encoded string `json:"encoded,omitempty"`
 	Error   string `json:"error,omitempty"`

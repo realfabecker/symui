@@ -42,6 +42,18 @@ export namespace domain {
 	        this.error = source["error"];
 	    }
 	}
+	export class EmptyResult {
+	    error?: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new EmptyResult(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.error = source["error"];
+	    }
+	}
 	export class EncodedResult {
 	    encoded?: string;
 	    error?: string;

@@ -12,6 +12,8 @@ export function Base64Encode(arg1:string):Promise<domain.EncodedResult>;
 
 export function CreateMd5Hash(arg1:string):Promise<domain.HashResult>;
 
+export function GpgAddKey(arg1:string,arg2:number):Promise<domain.EmptyResult>;
+
 export function GpgListKeys():Promise<domain.GpgListKeysResult>;
 
 export function JwtDecode(arg1:string):Promise<domain.JwtDecodedResult>;

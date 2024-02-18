@@ -22,6 +22,10 @@ export function CreateMd5Hash(arg1) {
   return window['go']['main']['App']['CreateMd5Hash'](arg1);
 }
 
+export function GpgAddKey(arg1, arg2) {
+  return window['go']['main']['App']['GpgAddKey'](arg1, arg2);
+}
+
 export function GpgListKeys() {
   return window['go']['main']['App']['GpgListKeys']();
 }

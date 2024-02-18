@@ -21,4 +21,5 @@ export interface IBase64Provider {
 
 export interface IGpgProvider {
   listKeys(): Promise<GpgKey[]>;
+  addKey(email: string, weeks: number): Promise<void>;
 }
